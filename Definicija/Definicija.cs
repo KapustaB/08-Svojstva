@@ -8,27 +8,46 @@ namespace Vsite.CSharp
         {
             public Osoba(string ime, string prezime)
             {
-                this.Ime = ime;
+                this.ime = ime;
                 Prezime = prezime;
             }
 
             // TODO: Javno dostupno polje Prezime nadomjestiti svojstvom (property) koje se izvan klase može samo čitati, a mijenjati se može samo iz klase
 
-            public string Prezime;
-
+            //public string Prezime;
+            public string Prezime { get; private set; }
 
             // TODO: Javno dostupno polje Ime nadomjestiti svojstvom (property) koje se izvan klase može čitati i zadavati, ali prilikom zadavanja treba onemogućiti
             // zadavanje praznim znakovnim nizom. U tom slučaju treba baciti iznimku tipa ArgumentNullException
 
-            public string Ime;
+            public string Ime
+            {
+                get { return ime; }
+                set
+                {
+                    if (value == null || value.Length == 0)
+                        throw new ArgumentNullException();
+                    ime = value;
+                }
+            }
+            string ime;
 
 
             // TODO: Javno dostupno polje DatumRođenja nadomjestiti svojstvom (property) koje se izvan klase može čitati i zadavati, ali za slučaj zadavanja
             // datuma većeg od trenutnog treba baciti iznimku tipa ArgumentOutOfRangeException. U pozivajućem kodu staviti odogovarajući kod za hvatanje
             // iznimke koji će u slučaju iznimke ispisati odgovarajuću poruku.
 
-            public DateTime DatumRođenja;
-
+            public DateTime DatumRođenja
+            {
+                get { return datumRođenja; }
+                set
+                {
+                    if (value >= DateTime.Now)
+                        throw new ArgumentOutOfRangeException();
+                    datumRođenja = value;
+                }
+            }
+            DateTime datumRođenja;
 
             public override string ToString()
             {
@@ -48,7 +67,7 @@ namespace Vsite.CSharp
             Console.WriteLine(o1);
 
             o1.Ime = "Pero";
-            o1.Prezime = "Kvrgić";
+            //o1.Prezime = "Kvrgić";
             Console.WriteLine(o1);
 
             o1.DatumRođenja = new DateTime(2020, 4, 13);
