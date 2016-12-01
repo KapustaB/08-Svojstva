@@ -7,23 +7,36 @@ namespace Vsite.CSharp
     // primjer svojstava sa stringom kao parametrom
     public class PoštanskiBrojevi
     {
-        private Dictionary<int, string> popis = new Dictionary<int,string>()
-        {
-            { 10000, "Zagreb" },
-            { 10360, "Sesvete" },
-            { 10020, "Novi Zagreb" },
-            { 21000, "Split" },
-            { 31000, "Osijek" },
-            { 41000, "Varaždin" },
-            { 51000, "Rijeka" }
-        };
+        private Dictionary<int, string> popis = new Dictionary<int, string>()
+       {
+           { 10000, "Zagreb" },
+           { 10360, "Sesvete" },
+           { 10020, "Novi Zagreb" },
+           { 21000, "Split" },
+           { 31000, "Osijek" },
+           { 41000, "Varaždin" },
+           { 51000, "Rijeka" }
+       };
 
         // TODO: Definirati svojstvo s int kao parametrom koje će za zadani poštanski broj vratiti mjesto. Otkomentirati naredbu u metodi IspišiNazivMjesta, pokrenuti program i testove.
-
+        public string this[int poštanskiBroj]
+        {
+            get
+            {
+                return popis[poštanskiBroj];
+            }
+        }
 
 
         // TODO: Definirati svojstvo sa string kao parametrom koje će za zadano mjesto vratiti poštanski broj. Otkomentirati naredbu u metodi IspišiPoštanskiBroj, pokrenuti program i testove.
 
+        public int this[string mjesto]
+        {
+            get
+            {
+                return popis.First(de => de.Value == mjesto).Key;
+            }
+        }
 
 
     }
